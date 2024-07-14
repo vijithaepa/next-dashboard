@@ -12,5 +12,10 @@ pnpm i
 
 pnpm dev
 
-### Learn Accessibility
-https://web.dev/learn/accessibility/
+### Learn further
+[Learn Accessibility](https://web.dev/learn/accessibility/)
+
+[Next.js Middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware)
+
+[next-auth](https://authjs.dev/reference/nextjs)
+`eg: user@nextmail.com/123456`
