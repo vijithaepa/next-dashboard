@@ -6,6 +6,7 @@ import {revalidatePath} from 'next/cache';
 import {redirect} from 'next/navigation';
 import {signIn} from '@/auth';
 import {AuthError} from 'next-auth';
+import {getUser} from "@/app/service/userService";
 
 const FormSchema = z.object({
     id: z.string(),
@@ -124,8 +125,10 @@ export async function authenticate(
 ) {
     try {
         await signIn('credentials', formData);
+        // const user = await getUser('user1@nextmail.com');
+        // console.log('User in action', user);
     } catch (error) {
-        console.log('Loging error ', error);
+        // console.log('Loging error ', error);
         if (error instanceof AuthError) {
             switch (error.type) {
                 case 'CredentialsSignin':

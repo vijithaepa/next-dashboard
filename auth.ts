@@ -5,16 +5,19 @@ import {z} from 'zod';
 import { sql } from '@vercel/postgres';
 import type { User } from '@/app/lib/definitions';
 import bcrypt from 'bcrypt';
+import {getUser} from "@/app/lib/mockData";
+// import {getUser} from "@/app/service/userService";
 
-async function getUser(email: string): Promise<User | undefined> {
-    try {
-        const user = await sql<User>`SELECT * FROM users WHERE email=${email}`;
-        return user.rows[0];
-    } catch (error) {
-        // console.error('Failed to fetch user:', error);
-        throw new Error('Failed to fetch user.');
-    }
-}
+
+// async function getUser(email: string): Promise<User | undefined> {
+//     try {
+//         const user = await sql<User>`SELECT * FROM users WHERE email=${email}`;
+//         return user.rows[0];
+//     } catch (error) {
+//         // console.error('Failed to fetch user:', error);
+//         throw new Error('Failed to fetch user.');
+//     }
+// }
 
 export const { auth, signIn, signOut } = NextAuth({
     ...authConfig,
@@ -26,9 +29,16 @@ export const { auth, signIn, signOut } = NextAuth({
 
             if (parsedCredentials.success) {
                 const { email, password } = parsedCredentials.data;
+
                 const user = await getUser(email);
-                if (!user) return null;
-                const passwordsMatch = await bcrypt.compare(password, user.password);
+
+                // const user = await getUser('user1@nextmail.com');
+                console.log('User in action', user);
+                // const user = users.find((u: any) => u.email === email); //Shanna@melissa.tv
+                console.log('Users back all', email, password, user);
+                if (user === null) return null;
+                const passwordsMatch = await bcrypt.compare(password, user.password);    //user.password
+                console.log('Users pass match', email, password, passwordsMatch);
                 if (passwordsMatch) return user;
             }
 

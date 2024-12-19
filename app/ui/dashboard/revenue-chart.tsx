@@ -2,7 +2,9 @@ import { generateYAxis } from '@/app/lib/utils';
 import { CalendarIcon } from '@heroicons/react/24/outline';
 import { lusitana } from '@/app/ui/fonts';
 import { Revenue } from '@/app/lib/definitions';
-import {fetchRevenue} from "@/app/lib/data";
+import {fetchRevenue} from "@/app/lib/mockData";
+// import {fetchRevenue} from "@/app/service/dashboardService";
+// import {fetchRevenue} from "@/app/lib/data";
 
 // This component is representational only.
 // For data visualization UI, check out:
@@ -41,7 +43,7 @@ export default async function RevenueChart() {
             ))}
           </div>
 
-          {revenue.map((month) => (
+          {revenue.map((month: any) => (
             <div key={month.month} className="flex flex-col items-center gap-2">
               <div
                 className="w-full rounded-md bg-blue-300"
