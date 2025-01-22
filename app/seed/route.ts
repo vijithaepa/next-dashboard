@@ -1,11 +1,11 @@
-// import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
 // import { db } from '@vercel/postgres';
 
 import { invoices, customers, revenue, users } from '../lib/placeholder-data';
 
 const mysql      = require('mysql8');
 // const client = await db.connect();
-export const client = mysql.createConnection({
+const client = mysql.createConnection({
   host: 'localhostt',
   user: 'nextuser',
   password: 'admin123',
